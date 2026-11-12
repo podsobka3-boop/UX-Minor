@@ -156,7 +156,7 @@ function NudgeCard({ nudge, onAnswer }: { nudge: NudgeEvent; onAnswer: (a: Answe
       <Flex vertical gap={16}>
         <Text style={{ fontSize: 20, lineHeight: '28px', fontWeight: 600 }}>{nudge.message}</Text>
         <Space wrap>
-          <Button type="primary" onClick={() => onAnswer('doing')}>{nudge.kind === 'done' ? 'Ещё делаю' : 'Делаю'}</Button>
+          <Button type="primary" onClick={() => onAnswer('doing')}>Делаю</Button>
           <Button color="orange" variant="filled" onClick={() => onAnswer('distracted')}>Отвлёкся</Button>
           <Button color="green" variant="solid" onClick={() => onAnswer('done')}>Сделал!</Button>
         </Space>

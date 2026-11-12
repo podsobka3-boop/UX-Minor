@@ -20,16 +20,11 @@ export async function showSystemNudge(ev: NudgeEvent, body: string) {
   if (!('Notification' in window) || Notification.permission !== 'granted') return;
   if (!('serviceWorker' in navigator)) return;
   const reg = await navigator.serviceWorker.ready;
-  const actions =
-    ev.kind === 'done'
-      ? [
-          { action: 'done', title: 'Сделал!' },
-          { action: 'still', title: 'Ещё делаю' },
-        ]
-      : [
-          { action: 'doing', title: 'Делаю' },
-          { action: 'distracted', title: 'Отвлёкся' },
-        ];
+  // Кнопки всегда одни и те же, на одних и тех же местах.
+  const actions = [
+    { action: 'doing', title: 'Делаю' },
+    { action: 'distracted', title: 'Отвлёкся' },
+  ];
   await reg.showNotification(ev.message, {
     body,
     tag: 'nudge',

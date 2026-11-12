@@ -7,9 +7,10 @@ const PROGRESS = [
   (g: string) => `Не забыл про «${g}»?`,
 ];
 
-// Каждая третья (примерно) тыкалка спрашивает, сделано ли.
-export function pickNudge(goal: string): { message: string; kind: 'progress' | 'done' } {
-  if (Math.random() < 0.3) return { message: `Сделал «${goal}»?`, kind: 'done' };
+// Все тыкалки одного типа: ответ всегда «Делаю» или «Отвлёкся», чтобы кнопки
+// в уведомлении не менялись и их можно было нажимать не глядя.
+// Отметить цель выполненной можно во вкладке (кнопка «Сделал!» или галочка).
+export function pickNudge(goal: string): { message: string; kind: 'progress' } {
   const tpl = PROGRESS[Math.floor(Math.random() * PROGRESS.length)];
   return { message: tpl(goal), kind: 'progress' };
 }
