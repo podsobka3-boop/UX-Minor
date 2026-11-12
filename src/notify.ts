@@ -11,7 +11,7 @@ export async function registerServiceWorker() {
 }
 
 export async function askPermission() {
-  if (!('Notification' in window)) return 'denied';
+  if (!('Notification' in window)) return 'denied' as NotificationPermission;
   if (Notification.permission !== 'default') return Notification.permission;
   return Notification.requestPermission();
 }
@@ -47,4 +47,17 @@ export async function closeSystemNudges() {
   if (!reg) return;
   const list = await reg.getNotifications({ tag: 'nudge' });
   list.forEach((n) => n.close());
+}
+
+// Пробное уведомление: сразу видно, пропускают ли его браузер и Windows.
+export async function showTestNotification() {
+  if (!('serviceWorker' in navigator)) return;
+  const reg = await navigator.serviceWorker.ready;
+  await reg.showNotification('Делаешь «проверку уведомлений»?', {
+    body: 'Так будет выглядеть вопрос. Кнопки тоже работают.',
+    tag: 'nudge-test',
+    icon: '/icon.svg',
+    data: { test: true },
+    ...({ actions: [{ action: 'doing', title: 'Делаю' }, { action: 'distracted', title: 'Отвлёкся' }] } as object),
+  });
 }
