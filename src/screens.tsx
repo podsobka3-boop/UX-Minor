@@ -4,6 +4,7 @@ import { CheckOutlined, PlusOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import type { Answer, Goal, NudgeEvent, Session, Settings } from './storage';
+import NotifyStatus from './NotifyStatus';
 import { formatDuration, minutesText, plural, timesText } from './nudges';
 
 dayjs.locale('ru');
@@ -47,6 +48,7 @@ export function NewGoalScreen(props: {
         onChange={(e) => setText(e.target.value)}
         onPressEnter={(e) => { if (!e.shiftKey) { e.preventDefault(); submit(); } }}
       />
+      {first && <NotifyStatus />}
       {first && (
         <Card size="small">
           <Flex vertical gap={8}>
@@ -127,6 +129,7 @@ export function SessionScreen(props: {
         </Space.Compact>
       </Card>
 
+      <NotifyStatus />
       <Button type="link" onClick={onFinish}>Завершить сессию</Button>
     </Flex>
   );

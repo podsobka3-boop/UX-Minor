@@ -11,6 +11,7 @@ self.addEventListener('notificationclick', (event) => {
   event.waitUntil(
     (async () => {
       const tabs = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      if (data.test) return; // пробное уведомление ничего не записывает
       const answer = action === 'still' ? 'doing' : action || null;
       for (const tab of tabs) {
         tab.postMessage({ type: 'nudge-answer', answer, nudgeAt: data.at });

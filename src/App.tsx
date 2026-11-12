@@ -46,8 +46,14 @@ export default function App() {
   // Часы: раз в секунду. В фоновой вкладке браузер может тикать реже,
   // поэтому время вопроса сравниваем с сохранённой отметкой, а не считаем тики.
   useEffect(() => {
-    const t = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(t);
+    try {
+      const w = new Worker(new URL('./tickWorker.ts', import.meta.url), { type: 'module' });
+      w.onmessage = () => setNow(Date.now());
+      return () => w.terminate();
+    } catch {
+      const t = setInterval(() => setNow(Date.now()), 1000);
+      return () => clearInterval(t);
+    }
   }, []);
 
   // Пора тыкать?
