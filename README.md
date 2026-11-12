@@ -1,2 +1,16 @@
-# UX-Minor
-Repository for UX Minor, vibecoding
+# Делаешь?
+
+Напоминалка о цели сессии за компьютером. Описание: [PRD.md](PRD.md), дизайн: [DESIGN.md](DESIGN.md).
+
+## Запуск
+
+Нужен Node.js (LTS) с https://nodejs.org.
+
+```
+npm install
+npm run dev
+```
+
+Откроется http://localhost:5173. Лучше всего в Chrome или Edge: там у системных уведомлений есть кнопки ответа.
+
+Для демонстрации включи «Демо-режим» на первом экране: вопросы будут приходить через 5–15 секунд.
