@@ -56,8 +56,9 @@ export async function showTestNotification() {
   await reg.showNotification('Делаешь «проверку уведомлений»?', {
     body: 'Так будет выглядеть вопрос. Кнопки тоже работают.',
     tag: 'nudge-test',
+    // renotify: повторная проверка снова всплывает баннером, а не тихо заменяет прошлую
     icon: '/icon.svg',
     data: { test: true },
-    ...({ actions: [{ action: 'doing', title: 'Делаю' }, { action: 'distracted', title: 'Отвлёкся' }] } as object),
+    ...({ renotify: true, actions: [{ action: 'doing', title: 'Делаю' }, { action: 'distracted', title: 'Отвлёкся' }] } as object),
   });
 }
